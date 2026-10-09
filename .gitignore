@@ -1,0 +1,31 @@
+# --- Secrets: never upload these ---
+# Your real Groq key for local runs
+.env
+# Your real Streamlit secrets (Cloud has its own copy in the Secrets box)
+.streamlit/secrets.toml
+
+# --- Python virtual environment (each computer builds its own) ---
+.venv/
+venv/
+
+# --- Python's automatic cache files ---
+__pycache__/
+*.pyc
+
+# --- Generated files you can recreate ---
+# Exports you downloaded while testing
+exports/
+# Offline benchmark output
+eval_results/
+# Sample files written by tests/test_offline.py
+tests/output/
+# Linter cache
+.ruff_cache/
+# Log files
+*.log
+
+# --- Editor and OS clutter ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

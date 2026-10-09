@@ -1,0 +1,165 @@
+/* Research Desk: custom styles.
+ *
+ * Colours and fonts for Streamlit's own widgets come from .streamlit/config.toml.
+ * This file styles only what config.toml can't: the report reading column,
+ * evidence/interpretation blocks, confidence tags, citation markers, notices,
+ * and a few layout details.
+ *
+ * Theme colours are CSS variables (--rd-*). ui_components.inject_css() sets
+ * them for the light or dark theme before this file is applied.
+ *
+ * SELECTOR RISK: rules marked [risk] use Streamlit's data-testid attributes or
+ * st-key-* classes. Those are more stable than generated class names, but a
+ * future Streamlit release could rename them. If something looks unstyled after
+ * an upgrade, check those rules first. Nothing here targets auto-generated
+ * class names like .css-1abc23 or .e1f1d6gn0.
+ */
+
+/* ---------- Reading column ---------- */
+.rd-report {
+  max-width: 70ch;                       /* ~65-75 characters per line */
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 1.0625rem;                  /* 17px body */
+  line-height: 1.65;
+  color: var(--rd-ink);
+}
+.rd-report p { margin: 0 0 0.9em; }
+.rd-report h2 {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 1.45rem; font-weight: 600; line-height: 1.3;
+  margin: 2.2rem 0 0.8rem; padding: 0 0 0.35rem;
+  border-bottom: 1px solid var(--rd-rule);
+  scroll-margin-top: 4rem;
+}
+.rd-report h3 {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 1.125rem; font-weight: 600; line-height: 1.4;
+  margin: 1.6rem 0 0.5rem; padding: 0;
+  scroll-margin-top: 4rem;
+}
+.rd-report ul { margin: 0 0 1em 1.1em; padding: 0; }
+.rd-report li { margin: 0 0 0.35em; }
+
+/* Small uppercase labels in the interface font */
+.rd-label {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--rd-muted); display: block; margin: 0 0 0.25rem;
+}
+.rd-label--accent { color: var(--rd-accent); }
+
+/* ---------- Title and metadata strip ---------- */
+.rd-title {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 2.1rem; font-weight: 600; line-height: 1.2; margin: 0.2rem 0 0.6rem;
+  max-width: 28ch; color: var(--rd-ink);
+}
+.rd-meta {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.8rem; color: var(--rd-muted); line-height: 1.6;
+  border-top: 1px solid var(--rd-rule); border-bottom: 1px solid var(--rd-rule);
+  padding: 0.45rem 0; margin: 0 0 1.2rem;
+}
+.rd-meta span + span::before { content: " · "; }
+
+/* ---------- Key findings ---------- */
+.rd-finding { border-top: 1px solid var(--rd-rule); padding-top: 0.2rem; margin-top: 1.4rem; }
+.rd-report h2 + .rd-finding { border-top: none; margin-top: 0.6rem; }
+.rd-evidence {
+  background: var(--rd-evidence-bg); padding: 0.7rem 0.9rem; border-radius: 3px; margin: 0.4rem 0 0.7rem;
+}
+.rd-evidence p, .rd-interp p { margin: 0; }
+.rd-interp {
+  border-left: 3px solid var(--rd-accent); padding: 0.1rem 0 0.1rem 0.9rem; margin: 0 0 0.7rem;
+  font-style: italic;
+}
+.rd-confline {
+  font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 0.85rem; color: var(--rd-muted);
+  margin: 0 0 0.6rem;
+}
+.rd-tag {
+  display: inline-block; font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
+  padding: 0.1rem 0.45rem; border-radius: 3px; margin-right: 0.4rem; vertical-align: 1px;
+}
+.rd-tag--High { color: var(--rd-high); background: var(--rd-high-bg); }
+.rd-tag--Medium { color: var(--rd-medium); background: var(--rd-medium-bg); }
+.rd-tag--Low { color: var(--rd-low); background: var(--rd-low-bg); }
+.rd-tag--added { color: var(--rd-medium); background: var(--rd-medium-bg); }
+.rd-tag--tier { color: var(--rd-muted); background: var(--rd-evidence-bg); }
+
+/* ---------- Citation markers: [3] links straight to the source ---------- */
+a.rd-cite {
+  font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.78em; font-style: normal;
+  color: var(--rd-accent) !important; text-decoration: none !important;
+  padding: 0 0.04em; border-bottom: 1px solid transparent;
+}
+a.rd-cite:hover, a.rd-cite:focus { border-bottom-color: var(--rd-accent); }
+
+/* ---------- Perspectives table ---------- */
+.rd-table-wrap { overflow-x: auto; margin: 0.5rem 0 1rem; }      /* tables scroll, never the page */
+.rd-table { border-collapse: collapse; width: 100%; font-size: 0.9rem; line-height: 1.45;
+  font-family: "IBM Plex Sans", system-ui, sans-serif; }
+.rd-table th { text-align: left; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em;
+  color: var(--rd-muted); border-bottom: 1px solid var(--rd-ink); padding: 0.35rem 0.5rem; font-weight: 600; }
+.rd-table td { vertical-align: top; border-bottom: 1px solid var(--rd-rule); padding: 0.5rem; min-width: 7rem; }
+
+/* ---------- Notices: warnings, errors, could-not-verify, limitations ---------- */
+.rd-notice {
+  border-left: 3px solid var(--rd-warn); background: var(--rd-warn-bg); color: var(--rd-ink);
+  padding: 0.7rem 0.95rem; border-radius: 0 3px 3px 0; margin: 0 0 1rem;
+  font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 0.92rem; line-height: 1.5;
+}
+.rd-notice strong { display: block; margin-bottom: 0.15rem; }
+.rd-notice ul { margin: 0.2rem 0 0 1rem; padding: 0; }
+.rd-notice--error { border-left-color: var(--rd-low); background: var(--rd-low-bg); }
+.rd-notice--quiet { border-left-color: var(--rd-rule); background: transparent; }
+.rd-box {               /* Could Not Verify and Limitations: impossible to miss */
+  border: 1px solid var(--rd-rule); border-left: 3px solid var(--rd-muted);
+  padding: 0.2rem 1rem 0.4rem; margin: 0.4rem 0 1rem; border-radius: 0 3px 3px 0;
+}
+.rd-box--verify { border-left-color: var(--rd-warn); }
+
+/* ---------- Sources ---------- */
+.rd-sources { list-style: none; margin: 0 !important; padding: 0; font-size: 0.95rem; }
+.rd-sources li { display: grid; grid-template-columns: 2.4rem 1fr; gap: 0.2rem; margin: 0 0 0.75rem; }
+.rd-sources .rd-num { font-family: "IBM Plex Mono", ui-monospace, monospace; color: var(--rd-accent); font-size: 0.85rem; padding-top: 0.12rem; }
+.rd-sources a { color: var(--rd-ink) !important; text-decoration-color: var(--rd-rule); text-underline-offset: 3px; }
+.rd-src-meta { display: block; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.74rem;
+  color: var(--rd-muted); word-break: break-word; line-height: 1.5; }
+
+/* Side column (contents + compact sources) */
+.rd-side { font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 0.88rem; line-height: 1.5; }
+.rd-side ol, .rd-side ul { list-style: none; margin: 0 0 1.2rem; padding: 0; }
+.rd-side li { margin: 0 0 0.4rem; }
+.rd-side a { color: var(--rd-ink) !important; text-decoration: none; }
+.rd-side a:hover { text-decoration: underline; }
+.rd-side .rd-num { font-family: "IBM Plex Mono", ui-monospace, monospace; color: var(--rd-accent); margin-right: 0.35rem; }
+
+/* ---------- Home ---------- */
+.rd-wordmark { font-family: "Source Serif 4", Georgia, serif; font-size: 1.9rem; font-weight: 600; margin: 0.4rem 0 0.2rem; }
+.rd-lede { color: var(--rd-muted); max-width: 62ch; margin: 0 0 1.2rem; line-height: 1.55; }
+.rd-help { color: var(--rd-muted); font-size: 0.85rem; margin: -0.3rem 0 0.8rem; }
+
+/* ---------- Streamlit details [risk] ---------- */
+/* Comfortable tap targets for buttons (about 44px). */
+[data-testid^="stBaseButton"] { min-height: 2.75rem; }
+/* History items read as a left-aligned list, not centred buttons. */
+.st-key-history button { justify-content: flex-start; text-align: left; }
+.st-key-history button > div { justify-content: flex-start; width: 100%; }
+.st-key-history button p { text-align: left; }
+/* Segmented controls wrap onto a second line on narrow screens instead of
+   hiding options behind a horizontal scroll. */
+[data-testid="stButtonGroup"] [role="radiogroup"] { flex-wrap: wrap; row-gap: 0.25rem; }
+/* Chat messages sit on the paper, not on a grey card. */
+[data-testid="stChatMessage"] { background: transparent; }
+/* Make the topic box feel like the focus of the page. */
+.st-key-topic textarea { font-size: 1.05rem; line-height: 1.5; }
+/* Contents for phones: shown only on narrow screens; the side column is hidden there. */
+.st-key-mobile-toc { display: none; }
+@media (max-width: 760px) {
+  .st-key-mobile-toc { display: block; }
+  .st-key-side-column { display: none; }
+  .rd-report { font-size: 1rem; }
+  .rd-title { font-size: 1.6rem; }
+}

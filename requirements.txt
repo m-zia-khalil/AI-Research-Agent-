@@ -1,0 +1,30 @@
+# AI Research Agent - Python 3.12 (local and Streamlit Community Cloud)
+# Exact pins (==) for the libraries whose APIs we call directly and that change often.
+# Bounded ranges (>=,<) for shared libraries that CrewAI also depends on, so pip can
+# pick a version that satisfies both us and CrewAI.
+
+# Agent framework + LiteLLM adapter (this is how CrewAI talks to Groq)
+crewai[litellm]==1.15.26
+
+# Web app
+streamlit==1.65.0
+
+# Free web search (formerly "duckduckgo-search")
+ddgs==9.16.0
+
+# Main-text extraction from web pages (also finds titles and dates)
+trafilatura==2.3.1
+
+# Reading uploaded documents
+pypdf==6.19.0
+python-docx==1.2.0
+
+# Exporting reports
+fpdf2==2.8.9
+python-pptx==1.0.2
+
+# Shared helpers (also used inside CrewAI)
+httpx>=0.28.1,<0.29
+pydantic>=2.11,<3
+python-dotenv>=1.0,<2
+json-repair>=0.50,<1

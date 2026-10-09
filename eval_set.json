@@ -1,0 +1,25 @@
+{
+  "about": "Offline benchmark topics. expected: report | hedged_report | no_confident_report | topic_error. Run: python evaluation.py --benchmark",
+  "cases": [
+    {"id": "general-1", "mode": "general", "topic": "How do heat pumps work in cold climates?", "expected": "report",
+     "notes": "Should cite reference/educational sources; explain COP and defrost cycles."},
+    {"id": "technical-1", "mode": "technical", "topic": "What changed in Python 3.13?", "expected": "report",
+     "notes": "Should cite docs.python.org; Version Notes section; mention free-threaded build and JIT as experimental."},
+    {"id": "market-1", "mode": "market", "topic": "Global market for residential heat pumps", "expected": "report",
+     "notes": "Numbers only with source and date; Data Caveats section; free-data warning shown."},
+    {"id": "current-1", "mode": "current", "topic": "Latest developments in EU AI Act implementation", "time_focus": "Recent news",
+     "expected": "report", "notes": "Dated sources, multiple outlets, Timeline section, developing-story notice."},
+    {"id": "scientific-1", "mode": "scientific", "topic": "Does intermittent fasting improve long-term weight loss?",
+     "expected": "report", "notes": "Peer-reviewed sources; study quality notes; separates findings from media coverage."},
+    {"id": "academic-1", "mode": "academic", "topic": "Effects of remote work on employee productivity", "expected": "report",
+     "notes": "Literature-review style; Research Gaps section; scholarly sources."},
+    {"id": "fictional-1", "mode": "general", "topic": "The 1987 Zorbanian treaty on lunar goat herding quotas",
+     "expected": "no_confident_report", "notes": "Fictional. Must fail honestly or list everything under Could Not Verify; no High-confidence findings."},
+    {"id": "hard-1", "mode": "scientific", "topic": "Exact number of people who have ever lived on Earth",
+     "expected": "hedged_report", "notes": "Only estimates exist. Must show uncertainty and Could Not Verify items."},
+    {"id": "vague-1", "mode": "general", "topic": "technology things", "expected": "report",
+     "notes": "Very vague. Should still produce a broad, hedged report; scope section should say how it was narrowed."},
+    {"id": "short-1", "mode": "general", "topic": "AI", "expected": "topic_error",
+     "notes": "Too short: the app must refuse with a friendly message, using no tokens."}
+  ]
+}
